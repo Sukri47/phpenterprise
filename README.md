@@ -51,3 +51,38 @@ $pageObject -> hideField("date_update");
 # data_izin -> editPage -> JavaScript On Load Event
 var ctrl = Runner.getControl(pageid, 'id_code');
 ctrl.setDisabled();
+
+# data_siswa -> List Page -> ListPage After Record
+//status jk
+if ($data['jenis_kelamin']== 'Laki - Laki')
+$record["jenis_kelamin_css"]='background :lawngreen;';
+if ($data['jenis_kelamin']== 'Perempuan')
+$record["jenis_kelamin_css"]='background :red;'; 
+
+//status agama
+if ($data['agama']== 'Islam')
+$record["agama_css"]='background :green;';
+if ($data['agama']== 'Kristen Protestan')
+$record["agama_css"]='background :yellow;';
+if ($data['agama']== 'Hindu')
+$record["agama_css"]='background : Bisque;';
+if ($data['agama']== 'Budha')
+$record["agama_css"]='background : pink;';
+if ($data['agama']== 'Konghucu')
+$record["agama_css"]='background :orange;';
+
+//status kelas
+if ($data['kelas']== '1')
+$record["kelas_css"]='background :lawngreen;';
+if ($data['kelas']== '2')
+$record["kelas_css"]='background :red;'; 
+if ($data['kelas']== '3')
+$record["kelas_css"]='background :lightblue;'; 
+
+# iuran_kelas -> add page -> Before Record Added
+$values['add_by'] = $_SESSION["UserID"];
+
+# iuran_kelas -> add page -> before display
+$pageObject -> hideField("add_by");
+$pageObject -> hideField("update_by");
+$pageObject -> hideField("date_update");
