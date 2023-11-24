@@ -86,3 +86,111 @@ $values['add_by'] = $_SESSION["UserID"];
 $pageObject -> hideField("add_by");
 $pageObject -> hideField("update_by");
 $pageObject -> hideField("date_update");
+
+# iuran_kelas -> add page -> JavaScript On Load Event
+function pajak(){
+ctrlPajak.setValue(Number(ctrlBansos.getValue()) * 0.11);
+};
+ctrlBansos.on('keyup', pajak);
+ctrlQuantity.on('keyup', pajak);
+
+//perhitungan total cost
+var ctrlTotalCost = Runner.getControl(pageid, 'total_cost');
+
+function totalCost(){
+ctrlTotalCost.setValue(Number(ctrlMakanan.getValue()) + Number(ctrlMinuman.getValue()) + Number(ctrlPajak.getValue()));
+};
+
+ctrlMakanan.on('keyup', totalCost);
+ctrlMinuman.on('keyup', totalCost);
+ctrlPajak.on('keyup', totalCost);
+ctrlQuantity.on('keyup', totalCost);
+
+//perhitungan pendapatan bersih
+var ctrlPendBersih = Runner.getControl(pageid, 'pendapatan_bersih');
+
+function bersih(){
+ctrlPendBersih.setValue(Number(ctrlTotal.getValue()) - Number(ctrlTotalCost.getValue()));};
+
+ctrlTotal.on('keyup', bersih);
+ctrlTotalCost.on('keyup', bersih);
+ctrlQuantity.on('keyup', bersih);
+
+# iuran_kelas -> editpage -> Before Record Update
+$values['update_by'] = $_SESSION["UserID"];
+$values['date_update'] = now();
+
+# iuran_kelas -> editpage -> Before Display
+$pageObject -> hideField("add_by");
+$pageObject -> hideField("update_by");
+$pageObject -> hideField("date_update");
+
+# iuran_kelas -> editpage -> JavaScript on load event
+var ctrlPrice = Runner.getControl(pageid, 'jmlh_byr');
+var ctrlQuantity = Runner.getControl(pageid, 'qty');
+var ctrlTotal = Runner.getControl(pageid, 'total');
+
+function func() {
+ctrlTotal.setValue(Number(ctrlPrice.getValue()) * Number(ctrlQuantity.getValue()));};
+
+ctrlPrice.on('keyup', func);
+ctrlQuantity.on('keyup', func);
+
+//perhitungan bansos
+ctrlBansos = Runner.getControl(pageid, 'sosial');
+
+function bansos(){
+ctrlBansos.setValue(Number(ctrlTotal.getValue()) * 0.5);
+};
+
+ctrlTotal.on('keyup' , bansos);
+ctrlQuantity.on('keyup' , bansos);
+
+//perhitungan makanan
+var ctrlMakanan = Runner.getControl(pageid, 'makanan_sosial');
+
+function makanan(){
+ctrlMakanan.setValue(Number(ctrlBansos.getValue()) * 0.7);
+};
+ctrlBansos.on('keyup', makanan);
+ctrlQuantity.on('keyup', makanan);
+
+//perhitungan minuman
+var ctrlMinuman = Runner.getControl(pageid, 'minuman_sosial');
+
+function minuman(){
+ctrlMinuman.setValue(Number(ctrlBansos.getValue()) * 0.3);
+};
+ctrlBansos.on('keyup', minuman);
+ctrlQuantity.on('keyup', minuman);
+
+//perhitungan ppn
+var ctrlPajak = Runner.getControl(pageid, 'ppn_sosial');
+
+function pajak(){
+ctrlPajak.setValue(Number(ctrlBansos.getValue()) * 0.11);
+};
+ctrlBansos.on('keyup', pajak);
+ctrlQuantity.on('keyup', pajak);
+
+//perhitungan total cost
+var ctrlTotalCost = Runner.getControl(pageid, 'total_cost');
+
+function totalCost(){
+ctrlTotalCost.setValue(Number(ctrlMakanan.getValue()) + Number(ctrlMinuman.getValue()) + Number(ctrlPajak.getValue()));
+};
+
+ctrlMakanan.on('keyup', totalCost);
+ctrlMinuman.on('keyup', totalCost);
+ctrlPajak.on('keyup', totalCost);
+ctrlQuantity.on('keyup', totalCost);
+
+//perhitungan pendapatan bersih
+var ctrlPendBersih = Runner.getControl(pageid, 'pendapatan_bersih');
+
+function bersih(){
+ctrlPendBersih.setValue(Number(ctrlTotal.getValue()) - Number(ctrlTotalCost.getValue()));};
+
+ctrlTotal.on('keyup', bersih);
+ctrlTotalCost.on('keyup', bersih);
+ctrlQuantity.on('keyup', bersih);
